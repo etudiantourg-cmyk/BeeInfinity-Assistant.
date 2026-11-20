@@ -36,7 +36,7 @@ class ScreenMonitorService : Service() {
         private const val SERVICE_NOTIFICATION_ID = 71
         private const val ALERT_NOTIFICATION_ID = 72
         private const val FRAME_INTERVAL_MS = 400L
-        private val TARGET_PATTERN = Regex("""(?<![0-9])1(?:[.,]0{1,2})?\\s*[X×](?![A-Z0-9])""")
+        private val TARGET_PATTERN = Regex("""(?<![0-9])1(?:[.,]0{1,2})?\s*[X×](?![A-Z0-9])""")
     }
 
     private var projection: MediaProjection? = null
@@ -250,7 +250,6 @@ class ScreenMonitorService : Service() {
         reader?.setOnImageAvailableListener(null, null)
         reader?.close()
         reader = null
-        projection?.unregisterCallback(object : MediaProjection.Callback() {})
         projection?.stop()
         projection = null
         worker?.quitSafely()
