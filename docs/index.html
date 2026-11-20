@@ -1,23 +1,49 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#101827">
-<title>BeeInfinity Assistant | تحميل التطبيق</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b1220"><meta name="description" content="BeeInfinity Assistant - مساعد ويب لفحص لقطات الشاشة والتعرّف على قيمة المضاعف">
+<link rel="manifest" href="./manifest.webmanifest">
+<title>BeeInfinity Assistant</title>
 <style>
-*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;background:radial-gradient(circle at top,#263b60,#101827 60%);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:#f8fafc}
-main{width:min(100%,520px);padding:34px 26px;border:1px solid #ffffff26;border-radius:28px;background:#ffffff0d;box-shadow:0 24px 70px #0006;text-align:center}
-.logo{width:76px;height:76px;margin:0 auto 18px;border-radius:22px;display:grid;place-items:center;background:linear-gradient(135deg,#facc15,#f97316);font-size:34px;color:#111827;font-weight:900}
-h1{font-size:27px;margin:0 0 10px}p{color:#cbd5e1;line-height:1.8;margin:10px 0 22px}
-a.button{display:block;text-decoration:none;background:linear-gradient(90deg,#facc15,#fb923c);color:#111827;font-weight:800;padding:16px 20px;border-radius:15px;font-size:18px}
-small{display:block;color:#94a3b8;line-height:1.8;margin-top:20px}
-.steps{text-align:right;background:#0b1220aa;border-radius:16px;padding:16px 20px;margin-top:24px;color:#dbeafe;line-height:2}
-</style></head>
-<body><main>
-<div class="logo">B</div>
-<h1>BeeInfinity Assistant</h1>
-<p>حمّل تطبيق أندرويد من هنا. بعد اكتمال التنزيل، افتح ملف APK واضغط «تثبيت».</p>
-<a class="button" href="https://github.com/etudiantourg-cmyk/BeeInfinity-Assistant./releases/latest/download/app-debug.apk">تحميل التطبيق APK</a>
-<div class="steps"><b>طريقة التثبيت من Chrome:</b><br>1. اضغط «تحميل التطبيق».<br>2. افتح الملف من إشعار التنزيلات في Chrome.<br>3. إذا طلب Android الإذن، اسمح لـ Chrome بتثبيت التطبيقات من هذا المصدر.<br>4. ارجع إلى ملف APK واضغط «تثبيت».</div>
-<small>ملاحظة: لا يمكن لصفحة ويب تثبيت APK بصمت؛ سيعرض Android شاشة تأكيد التثبيت. هذه نسخة اختبارية، ووظيفة النقر لم تُختبر بعد داخل اللعبة.</small>
-</main></body></html>
+:root{color-scheme:dark;--bg:#080f1d;--panel:#111c2e;--line:#26364e;--muted:#9aabc2;--gold:#f6c945;--green:#38d39f}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -15%,#263e62 0,#0b1424 48%,var(--bg) 78%);color:#f5f7fb;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh}
+.wrap{width:min(100% - 28px,760px);margin:auto;padding:28px 0 48px}.top{display:flex;align-items:center;gap:14px;margin-bottom:24px}.mark{width:54px;height:54px;border-radius:17px;background:linear-gradient(145deg,#ffe27a,#e88b22);display:grid;place-items:center;color:#182235;font-weight:1000;font-size:28px;box-shadow:0 9px 30px #f4b83c33}.brand h1{font-size:22px;margin:0}.brand p{margin:4px 0 0;color:var(--muted);font-size:13px}
+.badge{margin-right:auto;border:1px solid #35506e;background:#14243a;color:#b9d9ff;border-radius:99px;padding:7px 11px;font-size:12px}
+.card{background:linear-gradient(145deg,#142238ed,#0e192aed);border:1px solid var(--line);border-radius:23px;padding:22px;margin:14px 0;box-shadow:0 16px 42px #0003}.eyebrow{color:var(--gold);font-size:12px;font-weight:800;letter-spacing:.3px}.card h2{font-size:19px;margin:7px 0 8px}.desc{color:#b4c1d3;line-height:1.8;font-size:14px;margin:0 0 16px}
+.drop{border:1.5px dashed #50647f;border-radius:17px;padding:23px 14px;text-align:center;background:#0a1424;cursor:pointer}.drop strong{display:block;margin:8px 0}.drop span{font-size:12px;color:var(--muted)}input[type=file]{display:none}.preview{display:none;width:100%;max-height:320px;object-fit:contain;border-radius:14px;margin-top:14px;background:#050a12}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:15px}.btn{border:0;border-radius:13px;padding:13px 18px;font:inherit;font-weight:800;cursor:pointer}.primary{background:linear-gradient(100deg,#ffe078,#e9a52e);color:#1a2433;flex:1}.secondary{background:#22334b;color:#e8eff9;border:1px solid #354a67}.btn:disabled{opacity:.45;cursor:not-allowed}
+.status{display:flex;align-items:center;gap:10px;padding:14px 15px;background:#0a1424;border:1px solid var(--line);border-radius:14px;margin-top:16px}.dot{width:10px;height:10px;border-radius:50%;background:#7c8da5;flex:none}.status b{font-size:14px}.status small{display:block;color:var(--muted);margin-top:3px}
+.result{display:none;text-align:center;padding:20px;border-radius:16px;background:#102c2a;border:1px solid #286c5b;margin-top:14px}.result strong{font-size:34px;color:var(--green);display:block}.result p{margin:5px 0 0;color:#bce9db;font-size:13px}
+.note{font-size:12px;color:#9eacc0;line-height:1.8;margin:16px 2px}.steps{display:grid;gap:10px}.step{display:flex;gap:12px;color:#c6d2e2;font-size:13px;line-height:1.7}.num{width:25px;height:25px;flex:none;border-radius:8px;background:#253b57;color:#f6d36b;display:grid;place-items:center;font-weight:900}
+footer{text-align:center;color:#71839c;font-size:11px;padding:15px}
+@media(min-width:600px){.card{padding:26px}.brand h1{font-size:25px}}
+</style>
+</head>
+<body><main class="wrap">
+<header class="top"><div class="mark">B</div><div class="brand"><h1>BeeInfinity Assistant</h1><p>مساعد ويب ذكي لفحص لقطات الشاشة</p></div><span class="badge">نسخة ويب</span></header>
+<section class="card">
+<div class="eyebrow">فحص الصورة</div><h2>اكتشف قيمة المضاعف في لقطة الشاشة</h2>
+<p class="desc">ارفع لقطة شاشة للعبة، وسيحاول المساعد قراءة النص والتعرّف على ظهور 1.00X. يمكنك أيضاً لصق صورة من الحافظة.</p>
+<label class="drop" for="file"><div style="font-size:30px">▧</div><strong>اختر صورة أو اضغط هنا</strong><span>PNG أو JPG أو WEBP</span></label>
+<input id="file" type="file" accept="image/*"><img id="preview" class="preview" alt="معاينة الصورة">
+<div class="actions"><button id="scan" class="btn primary" disabled>تحليل الصورة</button><button id="clear" class="btn secondary">مسح</button></div>
+<div id="status" class="status"><i class="dot"></i><div><b>جاهز للفحص</b><small>اختر لقطة شاشة للبدء.</small></div></div>
+<div id="result" class="result"><strong>1.00X</strong><p>تم العثور على القيمة في الصورة المرفوعة.</p></div>
+<p class="note">هذه الأداة تحلل صورة تختارها بنفسك فقط. لا تستطيع صفحة الويب مراقبة لعبة تعمل في تطبيق آخر أو الضغط على أزرارها؛ ذلك يتطلب تطبيقاً أصلياً وصلاحيات نظام.</p>
+</section>
+<section class="card"><div class="eyebrow">كيف تستخدمه؟</div><h2>ثلاث خطوات بسيطة</h2><div class="steps"><div class="step"><span class="num">1</span><span>التقط صورة للشاشة التي تريد فحصها.</span></div><div class="step"><span class="num">2</span><span>ارفع الصورة في الأداة واضغط «تحليل الصورة».</span></div><div class="step"><span class="num">3</span><span>ستظهر نتيجة التعرّف إذا عثر OCR على 1.00X.</span></div></div></section>
+<footer>BeeInfinity Assistant · أداة ويب تجريبية · لا تنفّذ رهانات أو نقرات تلقائية</footer>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<script>
+const file=document.getElementById('file'),preview=document.getElementById('preview'),scan=document.getElementById('scan'),clear=document.getElementById('clear'),status=document.getElementById('status'),result=document.getElementById('result');let selected=null;
+function say(title,detail){status.innerHTML='<i class="dot"></i><div><b>'+title+'</b><small>'+detail+'</small></div>'}
+function loadImage(f){if(!f||!f.type.startsWith('image/'))return;selected=f;preview.src=URL.createObjectURL(f);preview.style.display='block';scan.disabled=false;result.style.display='none';say('الصورة جاهزة','اضغط تحليل الصورة لبدء قراءة النص.')}
+file.addEventListener('change',e=>loadImage(e.target.files[0]));
+document.querySelector('.drop').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();file.click()}});
+document.addEventListener('paste',e=>{const item=[...(e.clipboardData?.items||[])].find(x=>x.type.startsWith('image/'));if(item)loadImage(item.getAsFile())});
+scan.addEventListener('click',async()=>{if(!selected)return;scan.disabled=true;result.style.display='none';say('جارٍ تحليل الصورة…','قد يستغرق ذلك بضع ثوانٍ حسب سرعة جهازك.');try{if(!window.Tesseract)throw new Error('تعذّر تحميل محرك قراءة النص. تحقق من اتصال الإنترنت.');const out=await Tesseract.recognize(selected,'eng',{logger:m=>{if(m.status==='recognizing text')say('جارٍ قراءة النص…',Math.round((m.progress||0)*100)+'%')}});const raw=(out.data.text||'').toUpperCase().replace(/\s/g,'').replace(/[O]/g,'0');const found=/1[.,]?00X/.test(raw)||/1[.,]?0OX/.test(raw);if(found){result.style.display='block';say('تم العثور على 1.00X','تم التعرّف على القيمة في الصورة.')}else say('لم يتم العثور على 1.00X','جرّب صورة أوضح وتأكد أن القيمة ظاهرة بالكامل.');}catch(e){say('تعذّر التحليل',e.message||'حدث خطأ غير متوقع.')}finally{scan.disabled=false}});
+clear.addEventListener('click',()=>{selected=null;file.value='';preview.removeAttribute('src');preview.style.display='none';result.style.display='none';scan.disabled=true;say('جاهز للفحص','اختر لقطة شاشة للبدء.')});
+if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+</script></body></html>
