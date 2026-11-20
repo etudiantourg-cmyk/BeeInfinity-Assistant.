@@ -1,26 +1,81 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="#101827" android:fillViewport="true">
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:orientation="vertical" android:padding="24dp" android:gravity="center_horizontal">
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="BeeInfinity" android:textColor="#FFFFFF" android:textSize="30sp"
-            android:textStyle="bold" android:layout_marginTop="42dp"/>
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="ASSISTANT" android:textColor="#F5A623" android:textSize="13sp"
-            android:letterSpacing="0.22" android:layout_marginBottom="36dp"/>
-        <TextView android:id="@+id/status" android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:padding="18dp"
-            android:background="#1D293B" android:text="التحليل المباشر متوقف"
-            android:textColor="#FFFFFF" android:textSize="17sp" android:gravity="center"/>
-        <Button android:id="@+id/startButton" android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:text="بدء تحليل الشاشة مباشرة"
-            android:layout_marginTop="24dp"/>
-        <Button android:id="@+id/stopButton" android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:text="إيقاف التحليل"/>
-        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:text="يحلل التطبيق شاشة الهاتف مباشرة بعد موافقتك على إذن مشاركة الشاشة من أندرويد، ويصدر تنبيهاً عند ظهور 1.00X ثم يعيد الاستعداد بعد اختفائها. لا يضغط أزرار الرهان ولا ينفذ رهانات تلقائياً."
-            android:textColor="#B8C2D1" android:textSize="14sp" android:lineSpacingExtra="5dp"
-            android:layout_marginTop="28dp"/>
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0B1220"
+    android:fillViewport="true"
+    android:layoutDirection="rtl">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:text="BeeInfinity"
+            android:textColor="#FFFFFF"
+            android:textSize="32sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="32dp"
+            android:text="مساعد المراقبة المباشرة"
+            android:textColor="#F5B544"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#1A2940"
+            android:gravity="center"
+            android:minHeight="76dp"
+            android:padding="18dp"
+            android:text="التحليل المباشر متوقف"
+            android:textColor="#FFFFFF"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/startButton"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="24dp"
+            android:text="بدء تحليل الشاشة مباشرة"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/stopButton"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="10dp"
+            android:text="إيقاف التحليل"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:background="#131F32"
+            android:lineSpacingExtra="6dp"
+            android:padding="18dp"
+            android:text="كيف يعمل؟\n\n1. اضغط على بدء التحليل واسمح بمشاركة الشاشة.\n2. انتقل إلى اللعبة؛ سيقرأ التطبيق ما يظهر على الشاشة مباشرة.\n3. عند رصد 1X أو 1.0X أو 1.00X يصلك إشعار، ثم يعيد الاستعداد بعد اختفاء القيمة.\n\nمهم: التطبيق يراقب وينبّه فقط. لا ينفّذ نقرات أو رهانات تلقائية. قد تمنع بعض الألعاب أو الشاشات المحمية التقاط محتواها."
+            android:textColor="#C5D0E0"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:gravity="center"
+            android:text="يمكنك إيقاف المراقبة في أي وقت من داخل التطبيق."
+            android:textColor="#8191A8"
+            android:textSize="12sp" />
     </LinearLayout>
 </ScrollView>
