@@ -35,15 +35,23 @@ footer{text-align:center;color:#71839c;font-size:11px;padding:15px}
 <section class="card"><div class="eyebrow">كيف تستخدمه؟</div><h2>ثلاث خطوات بسيطة</h2><div class="steps"><div class="step"><span class="num">1</span><span>التقط صورة للشاشة التي تريد فحصها.</span></div><div class="step"><span class="num">2</span><span>ارفع الصورة في الأداة واضغط «تحليل الصورة».</span></div><div class="step"><span class="num">3</span><span>ستظهر نتيجة التعرّف إذا عثر OCR على 1.00X.</span></div></div></section>
 <footer>BeeInfinity Assistant · أداة ويب تجريبية · لا تنفّذ رهانات أو نقرات تلقائية</footer>
 </main>
-<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+
 <script>
 const file=document.getElementById('file'),preview=document.getElementById('preview'),scan=document.getElementById('scan'),clear=document.getElementById('clear'),status=document.getElementById('status'),result=document.getElementById('result');let selected=null;
 function say(title,detail){status.innerHTML='<i class="dot"></i><div><b>'+title+'</b><small>'+detail+'</small></div>'}
+async function loadOcrEngine(){
+ if(window.Tesseract)return window.Tesseract;
+ const urls=['https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js','https://unpkg.com/tesseract.js@5/dist/tesseract.min.js'];
+ for(const src of urls){
+  try{await new Promise((resolve,reject)=>{const s=document.createElement('script');s.src=src;s.onload=resolve;s.onerror=()=>reject(new Error('تعذّر تحميل محرك OCR من '+src));document.head.appendChild(s)});if(window.Tesseract)return window.Tesseract}catch(e){}
+ }
+ throw new Error('تعذّر تحميل محرك قراءة النص. افتح الصفحة مع اتصال إنترنت ثم أعد المحاولة.');
+}
 function loadImage(f){if(!f||!f.type.startsWith('image/'))return;selected=f;preview.src=URL.createObjectURL(f);preview.style.display='block';scan.disabled=false;result.style.display='none';say('الصورة جاهزة','اضغط تحليل الصورة لبدء قراءة النص.')}
 file.addEventListener('change',e=>loadImage(e.target.files[0]));
 document.querySelector('.drop').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();file.click()}});
 document.addEventListener('paste',e=>{const item=[...(e.clipboardData?.items||[])].find(x=>x.type.startsWith('image/'));if(item)loadImage(item.getAsFile())});
-scan.addEventListener('click',async()=>{if(!selected)return;scan.disabled=true;result.style.display='none';say('جارٍ تحليل الصورة…','قد يستغرق ذلك بضع ثوانٍ حسب سرعة جهازك.');try{if(!window.Tesseract)throw new Error('تعذّر تحميل محرك قراءة النص. تحقق من اتصال الإنترنت.');const out=await Tesseract.recognize(selected,'eng',{logger:m=>{if(m.status==='recognizing text')say('جارٍ قراءة النص…',Math.round((m.progress||0)*100)+'%')}});const raw=(out.data.text||'').toUpperCase().replace(/\s/g,'').replace(/[O]/g,'0');const found=/1[.,]?00X/.test(raw)||/1[.,]?0OX/.test(raw);if(found){result.style.display='block';say('تم العثور على 1.00X','تم التعرّف على القيمة في الصورة.')}else say('لم يتم العثور على 1.00X','جرّب صورة أوضح وتأكد أن القيمة ظاهرة بالكامل.');}catch(e){say('تعذّر التحليل',e.message||'حدث خطأ غير متوقع.')}finally{scan.disabled=false}});
+scan.addEventListener('click',async()=>{if(!selected)return;scan.disabled=true;result.style.display='none';say('جارٍ تحليل الصورة…','قد يستغرق ذلك بضع ثوانٍ حسب سرعة جهازك.');try{const engine=await loadOcrEngine();const out=await engine.recognize(selected,'eng',{logger:m=>{if(m.status==='recognizing text')say('جارٍ قراءة النص…',Math.round((m.progress||0)*100)+'%')}});const raw=(out.data.text||'').toUpperCase().replace(/\s/g,'').replace(/[O]/g,'0');const found=/1[.,]?00X/.test(raw)||/1[.,]?0OX/.test(raw);if(found){result.style.display='block';say('تم العثور على 1.00X','تم التعرّف على القيمة في الصورة.')}else say('لم يتم العثور على 1.00X','جرّب صورة أوضح وتأكد أن القيمة ظاهرة بالكامل.');}catch(e){say('تعذّر التحليل',e.message||'حدث خطأ غير متوقع.')}finally{scan.disabled=false}});
 clear.addEventListener('click',()=>{selected=null;file.value='';preview.removeAttribute('src');preview.style.display='none';result.style.display='none';scan.disabled=true;say('جاهز للفحص','اختر لقطة شاشة للبدء.')});
 if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
 </script></body></html>
