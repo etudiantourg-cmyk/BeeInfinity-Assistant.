@@ -119,8 +119,10 @@ class ScreenMonitorService : Service() {
                     val found = Regex("""1\s*[.]\s*00\s*[X×]""").containsMatchIn(text)
                     if (found && armed) {
                         armed = false
+                        val clickIntent = Intent(BetClickAccessibilityService.ACTION_CLICK_BET).setPackage(packageName)
+                        sendBroadcast(clickIntent)
                         val manager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-                        manager.notify(NOTIFICATION_ID, notification("1.00X detected — check the game"))
+                        manager.notify(NOTIFICATION_ID, notification("1.00X detected — Bet click requested"))
                     } else if (!found) {
                         armed = true
                     }
