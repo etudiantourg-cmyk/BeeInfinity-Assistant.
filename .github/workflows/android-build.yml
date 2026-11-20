@@ -6,6 +6,9 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -20,10 +23,19 @@ jobs:
           gradle-version: '8.9'
       - name: Assemble debug APK
         run: gradle assembleDebug
-
       - name: Upload debug APK
         uses: actions/upload-artifact@v4
         with:
           name: BeeInfinity-Assistant-debug
           path: app/build/outputs/apk/debug/*.apk
           if-no-files-found: error
+      - name: Publish APK download release
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest-apk
+          name: BeeInfinity Assistant - Latest APK
+          body: APK generated automatically from the latest successful main build.
+          files: app/build/outputs/apk/debug/*.apk
+          make_latest: true
+          fail_on_unmatched_files: true
