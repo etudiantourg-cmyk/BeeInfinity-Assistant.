@@ -24,6 +24,7 @@ import androidx.core.app.NotificationCompat
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions
+import java.nio.ByteBuffer
 import java.util.Locale
 import java.util.concurrent.atomic.AtomicBoolean
 
@@ -145,12 +146,24 @@ class ScreenMonitorService : Service() {
             val plane = image.planes[0]
             val pixelStride = plane.pixelStride
             val rowStride = plane.rowStride
-            require(pixelStride > 0 && rowStride >= pixelStride * image.width) {
+            require(
+                pixelStride > 0 &&
+                    rowStride >= pixelStride * image.width &&
+                    rowStride % pixelStride == 0
+            ) {
                 "Invalid image plane layout"
             }
             val paddedWidth = rowStride / pixelStride
+            val expectedBytes = rowStride * image.height
+            val pixelBytes = ByteArray(expectedBytes)
+            val sourceBuffer = plane.buffer.duplicate()
+            val bytesToCopy = minOf(sourceBuffer.remaining(), expectedBytes)
+            sourceBuffer.get(pixelBytes, 0, bytesToCopy)
+
+            // Some devices omit the unused padding bytes after the final pixel row.
+            // Zero-fill that tail so Bitmap.copyPixelsFromBuffer never underflows.
             val paddedBitmap = Bitmap.createBitmap(paddedWidth, image.height, Bitmap.Config.ARGB_8888)
-            paddedBitmap.copyPixelsFromBuffer(plane.buffer)
+            paddedBitmap.copyPixelsFromBuffer(ByteBuffer.wrap(pixelBytes))
             cropped = Bitmap.createBitmap(paddedBitmap, 0, 0, image.width, image.height)
             paddedBitmap.recycle()
         } catch (_: Exception) {
