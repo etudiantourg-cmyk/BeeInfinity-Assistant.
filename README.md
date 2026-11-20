@@ -1,18 +1,30 @@
 # BeeInfinity Assistant
 
-Android app prototype for monitoring a game screen and notifying when OCR detects **1.00X**.
+نموذج تطبيق Android لمراقبة ما يظهر على الشاشة مباشرة وإرسال تنبيه عند رصد معامل **1X أو 1.0X أو 1.00X** بواسطة التعرف على النصوص (OCR).
 
-## Current scope
-- Requests Android's official MediaProjection screen-capture permission.
-- Runs a foreground capture service while monitoring is active.
-- Uses on-device ML Kit text recognition to detect the visible multiplier.
-- Sends one notification when 1.00X appears, then rearms after it disappears.
-- Does **not** tap the game, hide automation, bypass anti-cheat, or promise game outcomes.
+## الوظائف الحالية
+- يطلب موافقة Android الرسمية على مشاركة الشاشة في كل جلسة.
+- يستخدم خدمة أمامية (Foreground Service) حتى تبقى المراقبة ظاهرة للمستخدم أثناء الانتقال إلى اللعبة.
+- يحلل إطارات الشاشة محلياً على الجهاز باستخدام ML Kit؛ لا يطلب رفع صور.
+- يرسل تنبيهاً عند ظهور المعامل، ثم يعيد الاستعداد بعد اختفائه.
+- يفصل إشعار حالة الخدمة عن إشعارات الرصد.
+- يتوقف عند إلغاء إذن مشاركة الشاشة أو الضغط على زر الإيقاف داخل التطبيق.
+- لا ينقر على أزرار اللعبة، ولا ينفذ رهانات، ولا يحاول إخفاء التشغيل أو تجاوز أنظمة الحماية.
 
-## Build
-Open this repository in Android Studio (recent stable version), allow Gradle sync, then build the `app` configuration. The project uses Android Gradle Plugin 8.7.3, Kotlin 2.0.21, and JDK 17.
+## المتطلبات والبناء
+- Android 8.0 (API 26) أو أحدث.
+- Android Gradle Plugin 8.7.3، Kotlin 2.0.21، وJDK 17.
+- افتح المشروع في إصدار حديث من Android Studio، ثم نفّذ Gradle Sync وابنِ وحدة `app`.
 
-## Use
-Install the app, grant notification permission if requested, tap **Start monitoring**, and approve Android's screen-capture prompt. Stop monitoring from the app notification or by returning to the app.
+## طريقة الاستخدام
+1. ثبّت التطبيق وافتحه.
+2. اسمح بالإشعارات إذا طلب Android ذلك.
+3. اضغط «بدء تحليل الشاشة مباشرة» ووافق على نافذة مشاركة الشاشة.
+4. انتقل إلى اللعبة؛ سيبقى إشعار الخدمة ظاهراً أثناء المراقبة.
+5. أوقف المراقبة من زر «إيقاف التحليل» داخل التطبيق.
 
-Screen capture is visible to Android and requires explicit consent each session. Some games may block screen capture.
+## حدود مهمة
+- OCR ليس مضموناً 100%؛ قد يفوّت النص إذا كان صغيراً أو مشوشاً أو متحركاً بسرعة، وقد تختلف النتائج حسب تصميم اللعبة.
+- بعض الألعاب أو الشاشات المحمية تمنع التقاط الشاشة؛ عندها لن يستطيع التطبيق قراءة محتواها.
+- يلزم منح إذن مشاركة الشاشة في كل مرة يبدأ فيها النظام جلسة التقاط جديدة.
+- التنبيه ليس إشارة ربح ولا يتنبأ بنتائج اللعبة، ولا ينبغي الاعتماد عليه لاتخاذ قرارات مالية.
