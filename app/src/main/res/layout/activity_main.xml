@@ -11,15 +11,15 @@
             android:letterSpacing="0.22" android:layout_marginBottom="36dp"/>
         <TextView android:id="@+id/status" android:layout_width="match_parent"
             android:layout_height="wrap_content" android:padding="18dp"
-            android:background="#1D293B" android:text="Monitoring is stopped"
+            android:background="#1D293B" android:text="التحليل المباشر متوقف"
             android:textColor="#FFFFFF" android:textSize="17sp" android:gravity="center"/>
         <Button android:id="@+id/startButton" android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:text="Start monitoring"
+            android:layout_height="wrap_content" android:text="بدء تحليل الشاشة مباشرة"
             android:layout_marginTop="24dp"/>
         <Button android:id="@+id/stopButton" android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:text="Stop monitoring"/>
+            android:layout_height="wrap_content" android:text="إيقاف التحليل"/>
         <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:text="The app reads the screen only after you approve Android's capture prompt. It alerts once when 1.00X appears and rearms after it disappears. No automatic betting or anti-detection behavior is included."
+            android:text="يحلل التطبيق شاشة الهاتف مباشرة بعد موافقتك على إذن مشاركة الشاشة من أندرويد، ويصدر تنبيهاً عند ظهور 1.00X ثم يعيد الاستعداد بعد اختفائها. لا يضغط أزرار الرهان ولا ينفذ رهانات تلقائياً."
             android:textColor="#B8C2D1" android:textSize="14sp" android:lineSpacingExtra="5dp"
             android:layout_marginTop="28dp"/>
     </LinearLayout>
