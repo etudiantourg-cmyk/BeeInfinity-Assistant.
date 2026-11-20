@@ -1,0 +1,13 @@
+{
+  "name": "BeeInfinity Assistant",
+  "short_name": "BeeInfinity",
+  "description": "مساعد ويب لفحص لقطات الشاشة والتعرّف على المضاعف",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#080f1d",
+  "theme_color": "#0b1220",
+  "icons": []
+}
