@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 try {
                     ContextCompat.startForegroundService(this, service)
-                    status.text = "المراقبة المباشرة تعمل الآن"
+                    status.text = "جارٍ بدء المراقبة... تحقق من إشعار BeeInfinity لتأكيد تشغيلها"
                 } catch (_: Exception) {
                     status.text = "تعذر بدء المراقبة. أعد فتح التطبيق وحاول مجدداً."
                 }
