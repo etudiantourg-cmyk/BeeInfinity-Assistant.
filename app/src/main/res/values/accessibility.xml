@@ -1,0 +1,3 @@
+<resources>
+    <string name="accessibility_service_description">Clicks a clearly labeled Bet button once when 1.00X is detected. Enable only when the game permits automation.</string>
+</resources>
