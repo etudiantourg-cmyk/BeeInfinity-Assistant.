@@ -22,7 +22,29 @@ jobs:
         with:
           gradle-version: '8.9'
       - name: Assemble debug APK
-        run: gradle assembleDebug
+        run: gradle --no-daemon clean assembleDebug
+      - name: Verify APK package, SDK range and signature
+        run: |
+          APK="app/build/outputs/apk/debug/app-debug.apk"
+          test -s "$APK"
+          "$ANDROID_HOME/build-tools/35.0.0/apksigner" verify --verbose "$APK"
+          "$ANDROID_HOME/build-tools/35.0.0/aapt" dump badging "$APK" | tee /tmp/apk-badging.txt
+          grep -q "package: name='com.beinfinity.assistant.installfix'" /tmp/apk-badging.txt
+          grep -q "sdkVersion:'26'" /tmp/apk-badging.txt
+          sha256sum "$APK"
+          ls -lh "$APK"
+      - name: Test installation and launch on Android 10 emulator
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 29
+          arch: x86_64
+          profile: pixel_2
+          disable-animations: true
+          script: |
+            adb install app/build/outputs/apk/debug/app-debug.apk
+            adb shell monkey -p com.beinfinity.assistant.installfix -c android.intent.category.LAUNCHER 1
+            sleep 5
+            adb shell dumpsys package com.beinfinity.assistant.installfix | grep -q "versionName=0.2.1"
       - name: Upload debug APK
         uses: actions/upload-artifact@v4
         with:
@@ -35,7 +57,7 @@ jobs:
         with:
           tag_name: latest-apk
           name: BeeInfinity Assistant - Latest APK
-          body: APK generated automatically from the latest successful main build.
+          body: APK built, signature-verified, and installation-tested on an Android 10 emulator.
           files: app/build/outputs/apk/debug/*.apk
           make_latest: true
           fail_on_unmatched_files: true
